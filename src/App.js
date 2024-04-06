@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import Homepage from "./Homepage";
+import Question from "./Question";
+import Result from "./Result";
 
-function App() {
+
+export const myBasket = React.createContext()
+
+function App() 
+{
+  const [ gameState, setGameState ] = React.useState("homepage")
+  // gameState = "question"
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Conditional Rendering */}
+
+      <myBasket.Provider value={ { setGame: setGameState } }>
+        { gameState == "homepage" && <Homepage /> }
+      </myBasket.Provider>
+      
+      { gameState == "question" && <Question />}
+      { gameState == "result" && <Result />}
+
     </div>
   );
 }
