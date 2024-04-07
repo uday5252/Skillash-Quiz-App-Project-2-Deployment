@@ -1,4 +1,5 @@
 import React from 'react'
+import { myBasket } from './App'
 
 
 const questionsData = [
@@ -36,15 +37,15 @@ function Question()
     const [ answerSelected, setAnswerSelected ] = React.useState("")
     // answerSelected = ""
 
-    const [ score, setScore ] = React.useState(0)
-    // score = 0
+    const { setGame,  myScore, mySetScore } = React.useContext(myBasket)//myScore: score, mySetScore: setScore 
+   
 
     function goToNextQuestion()
     {
         // Logic to check the answer
         if(answerSelected == questionsData[currentQuestionIndex].Answer)
         {
-            setScore(score + 1)
+            mySetScore(myScore + 1)
         }
 
         // Logic to go to the next question
@@ -56,10 +57,11 @@ function Question()
         // Logic to check the answer
         if(answerSelected == questionsData[currentQuestionIndex].Answer)
         {
-            setScore(score + 1)
+            mySetScore(myScore + 1)
         }
 
-        //Results Page
+        //Results Page --> We have to call Result component --> send the score variable
+        setGame("result")
     }
     
   return (
